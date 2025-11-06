@@ -3,9 +3,7 @@ services:
     name: beat-the-chat-backend
     runtime: node
     plan: free
-    buildCommand: pnpm install && pnpm --filter backend build
+    buildCommand: pnpm install --frozen-lockfile && pnpm -w run render:build
     startCommand: pnpm --filter backend start
-    envVars:
-      - key: NODE_ENV
-        value: production
+    healthCheckPath: /health
 
