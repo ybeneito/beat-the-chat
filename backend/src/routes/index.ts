@@ -1,7 +1,7 @@
-import { Router } from 'express';
-import { quizRouter } from './quiz.routes';
+import { Router, type IRouter } from 'express';
+import { quizRouter } from './quiz.routes.js';
 
-export const router = Router();
+export const router: IRouter = Router();
 
 // Routes
 router.use('/quiz', quizRouter);

@@ -1,9 +1,9 @@
-import { get } from '../utils/http.client';
+import { get } from '../utils/http.client.js';
 import type {
   OpenTDBResponse,
   Question,
   GetQuestionsOptions
-} from '../types/quiz.types';
+} from '../types/quiz.types.js';
 
 const OPENTDB_BASE_URL = 'https://opentdb.com/api.php';
 

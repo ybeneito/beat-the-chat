@@ -1,7 +1,7 @@
-import { Router, Request, Response } from 'express';
-import { quizService } from '../services/quiz.service';
+import { Router, type IRouter, Request, Response } from 'express';
+import { quizService } from '../services/quiz.service.js';
 
-export const quizRouter = Router();
+export const quizRouter: IRouter = Router();
 
 /**
  * GET /api/quiz/questions
