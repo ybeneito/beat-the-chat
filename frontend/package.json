@@ -1,0 +1,12 @@
+{
+  "name": "@beat-the-chat/frontend",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "echo 'Frontend Angular - À venir en V1'",
+    "build": "echo 'Frontend Angular - À venir en V1'"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
+
