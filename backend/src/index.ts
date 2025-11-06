@@ -3,39 +3,19 @@
  * Point d'entrée principal
  */
 
-import express, { Request, Response } from 'express';
+import { createApp } from './app';
 
-const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware basique
-app.use(express.json());
-
-// Route de santé pour vérifier que le serveur fonctionne
-app.get('/health', (req: Request, res: Response) => {
-  res.json({ 
-    status: 'ok', 
-    message: 'Beat The Chat Backend is running!',
-    timestamp: new Date().toISOString()
-  });
-});
-
-// Route racine
-app.get('/', (req: Request, res: Response) => {
-  res.json({ 
-    message: '🎮 Beat The Chat - Backend API',
-    version: '0.0.1',
-    endpoints: {
-      health: '/health'
-    }
-  });
-});
+// Création de l'application Express
+const app = createApp();
 
 // Démarrage du serveur
 app.listen(PORT, () => {
   console.log('🎮 Beat The Chat - Backend');
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📍 Health check: http://localhost:${PORT}/health`);
+  console.log(`📍 API: http://localhost:${PORT}/api`);
 });
 
 // TODO: Setup Twitch auth (plus tard)
