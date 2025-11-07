@@ -1,21 +1,22 @@
-export interface OpenTDBResponse {
-  response_code: number;
-  results: OpenTDBQuestion[];
+export interface QuizzApiResponse {
+  count: number;
+  quizzes: QuizzApiQuestion[];
 }
 
-export interface OpenTDBQuestion {
-  category: string;
-  type: 'multiple' | 'boolean';
-  difficulty: 'easy' | 'medium' | 'hard';
+export interface QuizzApiQuestion {
+  id: string;
   question: string;
-  correct_answer: string;
-  incorrect_answers: string[];
+  answer: string;
+  categoryId: string;
+  category: string;
+  difficulty: 'facile' | 'normal' | 'difficile';
+  badAnswers: string[];
 }
 
 export interface Question {
   id: string;
   category: string;
-  difficulty: 'easy' | 'medium' | 'hard';
+  difficulty: 'facile' | 'normal' | 'difficile';
   question: string;
   correctAnswer: string;
   incorrectAnswers: string[];
@@ -23,8 +24,8 @@ export interface Question {
 }
 
 export interface GetQuestionsOptions {
-  amount: number;
-  difficulty?: 'easy' | 'medium' | 'hard';
+  limit: number;
+  difficulty?: 'facile' | 'normal' | 'difficile';
   category?: string;
 }
 

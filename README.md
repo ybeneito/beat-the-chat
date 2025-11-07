@@ -60,9 +60,19 @@ Le backend peut être déployé sur Render. Voir [RENDER_SETUP.md](./RENDER_SETU
 
 ## 🎯 Roadmap
 
+- [x] V0 : API Quiz en français (QuizAPI v2)
 - [ ] V0 : MVP avec page HTML simple
 - [ ] V1 : Webapp Angular pour configuration
 - [ ] V2 : Module viewer Angular
+
+## 📚 API Utilisée
+
+### QuizAPI v2
+Ce projet utilise [QuizAPI v2](https://quizzapi.jomoreschi.fr/) de Jonathan Moreschi pour les questions de quiz en français.
+
+**Attribution requise :** QuizAPI v2 - Jonathan Moreschi (https://quizzapi.jomoreschi.fr/)
+
+**Licence :** PolyForm Noncommercial 1.0.0 - Usage non commercial uniquement
 
 ## 📝 License
 

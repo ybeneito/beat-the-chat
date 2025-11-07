@@ -1,11 +1,12 @@
 import { get } from '../utils/http.client.js';
 import type {
-  OpenTDBResponse,
   Question,
-  GetQuestionsOptions
+  GetQuestionsOptions,
+  QuizzApiResponse,
+  QuizzApiQuestion
 } from '../types/quiz.types.js';
 
-const OPENTDB_BASE_URL = 'https://opentdb.com/api.php';
+const OPENTDB_BASE_URL = 'https://quizzapi.jomoreschi.fr/api/v2/quiz';
 
 /**
  * Décode les entités HTML (ex: &quot; → ")
@@ -30,27 +31,27 @@ function shuffle<T>(array: T[]): T[] {
   return shuffled;
 }
 
-function formatQuestion(openTDBQuestion: OpenTDBResponse['results'][0], index: number): Question {
+function formatQuestion(quizzApiQuestion: QuizzApiQuestion): Question {
   const allAnswers = [
-    openTDBQuestion.correct_answer,
-    ...openTDBQuestion.incorrect_answers
+    quizzApiQuestion.answer,
+    ...quizzApiQuestion.badAnswers
   ];
 
   return {
-    id: `question-${index}`,
-    category: decodeHtml(openTDBQuestion.category),
-    difficulty: openTDBQuestion.difficulty,
-    question: decodeHtml(openTDBQuestion.question),
-    correctAnswer: decodeHtml(openTDBQuestion.correct_answer),
-    incorrectAnswers: openTDBQuestion.incorrect_answers.map(decodeHtml),
+    id: quizzApiQuestion.id,
+    category: quizzApiQuestion.category,
+    difficulty: quizzApiQuestion.difficulty,
+    question: decodeHtml(quizzApiQuestion.question),
+    correctAnswer: decodeHtml(quizzApiQuestion.answer),
+    incorrectAnswers: quizzApiQuestion.badAnswers.map(decodeHtml),
     allAnswers: shuffle(allAnswers).map(decodeHtml)
   };
 }
 
 
-function buildOpenTDBUrl(options: GetQuestionsOptions): string {
+function buildQuizzApiUrl(options: GetQuestionsOptions): string {
   const params = new URLSearchParams({
-    amount: options.amount.toString()
+    limit: options.limit.toString()
   });
 
   if (options.difficulty) {
@@ -65,14 +66,14 @@ function buildOpenTDBUrl(options: GetQuestionsOptions): string {
 }
 
 export async function getQuestions(options: GetQuestionsOptions): Promise<Question[]> {
-  const url = buildOpenTDBUrl(options);
-  const response = await get<OpenTDBResponse>(url);
+  const url = buildQuizzApiUrl(options);
+  const response = await get<QuizzApiResponse>(url);
 
-  if (response.response_code !== 0) {
-    throw new Error(`OpenTDB API error: response_code ${response.response_code}`);
+  if (!response.quizzes || response.quizzes.length === 0) {
+    throw new Error('No questions returned from QuizAPI');
   }
 
-  return response.results.map((question, index) => formatQuestion(question, index));
+  return response.quizzes.map((question) => formatQuestion(question));
 }
 
 export const quizService = {

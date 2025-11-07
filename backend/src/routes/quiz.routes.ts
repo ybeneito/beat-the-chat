@@ -6,18 +6,18 @@ export const quizRouter: IRouter = Router();
 /**
  * GET /api/quiz/questions
  * Query params:
- * - amount: nombre de questions (défaut: 10)
- * - difficulty: easy, medium, hard (optionnel)
- * - category: ID de catégorie (optionnel)
+ * - limit: nombre de questions (défaut: 10)
+ * - difficulty: facile, normal, difficile (optionnel)
+ * - category: slug de catégorie (ex: culture_generale, histoire) (optionnel)
  */
 quizRouter.get('/questions', async (req: Request, res: Response) => {
   try {
-    const amount = parseInt(req.query.amount as string) || 10;
-    const difficulty = req.query.difficulty as 'easy' | 'medium' | 'hard' | undefined;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const difficulty = req.query.difficulty as 'facile' | 'normal' | 'difficile' | undefined;
     const category = req.query.category as string | undefined;
 
     const questions = await quizService.getQuestions({
-      amount,
+      limit,
       difficulty,
       category
     });
