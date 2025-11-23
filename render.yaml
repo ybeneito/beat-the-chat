@@ -6,4 +6,8 @@ services:
     buildCommand: pnpm install --frozen-lockfile && pnpm -w run render:build
     startCommand: pnpm --filter backend start
     healthCheckPath: /health
+    # Variables d'environnement à configurer dans le dashboard Render
+    # TWITCH_CLIENT_ID: à définir dans Environment
+    # TWITCH_ACCESS_TOKEN: à définir dans Environment (user access token)
+    # TWITCH_CHANNEL: à définir dans Environment (optionnel, défaut: wazz34)
 

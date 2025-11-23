@@ -1,5 +1,6 @@
 import express, { Express } from 'express';
 import { router } from './routes/index.js';
+import { chatService } from './services/chat.service.js';
 
 export function createApp(): Express {
   const app = express();
@@ -20,7 +21,10 @@ export function createApp(): Express {
     res.json({
       status: 'ok',
       message: 'Beat The Chat Backend is running!',
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      chat: {
+        connected: chatService.connected
+      }
     });
   });
 
