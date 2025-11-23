@@ -6,8 +6,8 @@
 import { StaticAuthProvider } from '@twurple/auth';
 import { ChatClient } from '@twurple/chat';
 
-const CLIENT_ID = process.env.TWITCH_CLIENT_ID || '0ybd4eav5qo9vs4307jr14eo4npgnj';
-const ACCESS_TOKEN = process.env.TWITCH_ACCESS_TOKEN || 'tfuj3jh78n0jmuqnnhp3zsi3kx84d8';
+const CLIENT_ID = process.env.TWITCH_CLIENT_ID
+const ACCESS_TOKEN = process.env.TWITCH_ACCESS_TOKEN
 
 class ChatService {
   private chatClient: ChatClient | null = null;
