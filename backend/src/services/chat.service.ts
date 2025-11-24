@@ -23,7 +23,9 @@ class ChatService {
 
       return;
     }
-
+    if (!CLIENT_ID || !ACCESS_TOKEN) {
+      throw new Error('TWITCH_CLIENT_ID et TWITCH_ACCESS_TOKEN sont requis');
+    }
     // AuthProvider avec clientId et accessToken
     const authProvider = new StaticAuthProvider(CLIENT_ID, ACCESS_TOKEN);
 
